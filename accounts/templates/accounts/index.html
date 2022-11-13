@@ -1,0 +1,91 @@
+{%  extends 'accounts/main.html' %}
+
+{% block content %}
+
+{% load static  %}
+    
+    <!-- Hero Banner -->
+    <div class="container-fluid px-0 mb-5 ml-0 ">
+        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src={% static 'navbar2/img/hero.png' %} alt="Image">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                            <!-- <div>
+                                <input style="margin-left: 15rem; margin-top: -150px;" placeholder="search"/>
+                            </div> -->
+                                <div class="col-lg-8 text-start">
+                                    <h4 style="color:rgb(108, 23, 23); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Gewog Management System</h4> <br>
+                                    <h1 style="color: rgb(9, 56, 41); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Your Service,<br>Our Duty</h1><br>
+                                    <h6 style="color: rgb(9, 56, 41);  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Commited to people, commited to future</h6><br>
+                                    <a href="explore.html" class="btn btn-secondary" style="width: 100px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Explore</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    <!-- Hero banner End -->
+    <br> <br>
+    <!-- Service Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto pb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <h5 class="section-title bg-white text-center text-primary px-3" style="font-weight:bold;color:rgb(6, 89, 50); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Services</h5><br><br><br>
+                <p>For users to fill in the child data users should be having marriage certificate, and for user to register for their marriage, both husband and wife should be resgisted to our system.</p>
+            </div>
+          
+            <div class="row gy-5 gx-4">
+                <div class="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item d-flex h-100">
+                        <div class="service-img">
+                            <img class="img-fluid" src={% static 'navbar2/img/personal.jpg' %} alt="">
+                        </div>
+                        <div class="service-text p-5 pt-0">
+                            <div class="service-icon">
+                                <img class="img-fluid rounded-circle" style="height:110px" src={% static 'navbar2/img/personal.jpg' %} alt="">
+                            </div>
+                            <h5 class="mb-3" style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Record Personal Information</h4>
+                            <p class="mb-4">Record your personal informations.</p>
+                            <a class="btn btn-square rounded-circle" href="Personal_register.html"><i class="bi bi-chevron-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item d-flex h-100">
+                        <div class="service-img">
+                            <img class="img-fluid" src={% static 'navbar2/img/child.jpg' %} alt="">
+                        </div>
+                        <div class="service-text p-5 pt-0">
+                            <div class="service-icon">
+                                <img class="img-fluid rounded-circle" style="height:110px" src={% static 'navbar2/img/child.jpg' %} alt="">
+                            </div>
+                            <h5 class="mb-3"style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Child Census Registration</h5>
+                            <p class="mb-4">Record the data of teh child.</p>
+                            <a class="btn btn-square rounded-circle" href="child_census.html"><i class="bi bi-chevron-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item d-flex h-100">
+                        <div class="service-img">
+                            <img class="img-fluid" src={% static 'navbar2/img/request.jpg' %} alt="">
+                        </div>
+                        <div class="service-text p-5 pt-0">
+                            <div class="service-icon">
+                                <img class="img-fluid rounded-circle" style="height:110px" src={% static 'navbar2/img/request.jpg' %} alt="">
+                            </div>
+                            <h5 class="mb-3" style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Request Pass</h5>
+                            <p class="mb-4">Requesting with your strong reason</p>
+                            <a class="btn btn-square rounded-circle" href="pass.html"><i class="bi bi-chevron-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+
+{% endblock %}
