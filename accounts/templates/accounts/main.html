@@ -14,7 +14,7 @@
 	
 		<!-- Favicon -->
 		<link href="img/favicon.ico" rel="icon">
-	
+
 		<!-- Google Web Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,11 +39,11 @@
 	
 		<!-- Template Stylesheet -->
 		<link href={% static 'navbar2/css/style.css' %} rel="stylesheet">
-	
+
 	
 	</head>
 <body>
-	{%  include 'accounts/navbar2.html' %}
+	{%  include 'accounts/navbar1.html'  %}
 	
 	<div class="container-fluid">
 	{% block content %}
@@ -72,5 +72,36 @@
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
    <script type="module" src="https://unpkg.com/ionicons@5.5/dist/ionicons.esm.js"></script>
    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+   
+
+   <!-- Template Javascript -->
+   <script src={% static 'navbar2/js/main.js' %}></script>
+
+   <!-- dropdown -->
+   <script>
+		document.getElementById("drop").addEventListener("click", function(e) {
+	   document.getElementById("myDropdown").classList.toggle("show");
+	 });
+	 
+	 
+	 // Close the dropdown if the user clicks outside of it
+	 window.addEventListener("click", function(event) {
+	   if (!event.target.matches('.dropbtn')) {
+		 document.querySelectorAll(".dropdown-content.show")
+		   .forEach(openDropdown => openDropdown.classList.remove('show'))
+	   }
+	 });
+   </script>
   
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src={% static 'css/assets/js/theme.js' %}></script>
+	
+    <script src={% static 'css/assets/js/jquery.min.js' %}></script>
+    <script src={% static 'css/assets/bootstrap/js/bootstrap.min.js' %}></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src={% static 'css/assets/js/theme.js' %}></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </html>

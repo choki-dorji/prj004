@@ -186,18 +186,27 @@
 						Signup
 					</span>
 					
-					
+				
+						<div class="container-fluid p-0">
+						<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="True">&times;</span>
+							</button>
+							 {{form.errors}}
+						</div>
+						</div>
+				
             
 					<div class="wrap-input100 validate-input" style="margin-top: 10%;">
 						
-						<input class="input100" type="text" name="username">
-						<span class="focus-input100" data-placeholder="username"></span>
+						<input class="input100" type="integer" name="username" required=11>
+						<span class="focus-input100" data-placeholder="Enter CID"></span>
 					</div>
 
           <div class="wrap-input100 validate-input" style="margin-top: 10%;">
 						
 						<input class="input100" type="email" name="email">
-						<span class="focus-input100" data-placeholder="email"></span>
+						<span class="focus-input100" data-placeholder="Enter email"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
@@ -205,7 +214,7 @@
 							<i class="zmdi zmdi-eye"></i>
 						</span>
 						<input class="input100" type="password" name="password1">
-						<span class="focus-input100" data-placeholder="Password"></span>
+						<span class="focus-input100" data-placeholder="Enter Password"></span>
 					</div>
 
           <div class="wrap-input100 validate-input" data-validate="Confirm password">
@@ -223,7 +232,8 @@
 								Sign up
 							</button>
 						</div>
-						{{form.errors}}
+
+						
 					
 					</div>
 					

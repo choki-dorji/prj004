@@ -80,20 +80,16 @@
                 <!-- drop down menu start-->
                
                 <div class="dropdown" style="margin-left: 30px">
-                  {% for x in profile %}
-                  {% if x.user == request.user %}
 
-                    <img class="dropbtn" id="drop"
-                        src={{x.profile.url}} style="width: 30px; height :30px; margin-top: 24px;"/>
-                    {% endif %}
-                    {% endfor %}
+                    <img class="dropbtn" id="drop" src= {% static "images/jur.png" %} alt="image" style="width: 30px; height :30px; margin-top: 24px; border-radius: 50%;"/>
+                  
                     <div id="myDropdown" class="dropdown-content" style="margin-top: 40px; width: 200px; margin-top: 30px; margin-left: -5.5rem;">
                       <div>
                         <a href="{% url 'profile' %}"><i class="fa fa-user" style="padding-left: 10px; margin-right: 1em;"></i>User Profile</a>
                       </div>
 
                       <div>
-                        <a href="pass_result.html"><i class="fa fa-check" style="padding-left: 10px; margin-right: 1em;"></i>Pass</a>
+                        <a href="{% url 'passview' %}"><i class="fa fa-check" style="padding-left: 10px; margin-right: 1em;"></i>Pass</a>
                       </div>
 
                       <div>

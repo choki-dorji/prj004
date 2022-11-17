@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Pass</title>
+    <link rel="stylesheet" href={% static 'css/assets/bootstrap/css/bootstrap.min.css' %}/>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    />
+    <link rel="stylesheet" href={% static 'css/assets/fonts/fontawesome-all.min.css'
+    %}/> <link rel="stylesheet" href={% static 'css/assets/css/untitled.css' %} />
+  </head>
+
+  <body class="bg-gradient-primary">
+    <div class="container">
+        &nbsp;&nbsp;
+        <img
+          src={% static 'css/assets/img/circle-user-solid%20(1).svg' %}
+          style="padding-right: 10px; color: #b6514f"
+        />
+        &nbsp;<strong>PASS RESULT</strong>
+      </h4>
+      {% for x in passview %}
+      {% if x.user == request.user %}
+      {% if x.status == 'pending' %}
+      <div
+        class="status"
+        style="
+          height: 117px;
+          box-shadow: 5px 10px rgb(172, 201, 25);
+          border: 1px solid rgb(75, 72, 72);
+        "
+      >
+   
+      <!-- cut this line -->
+        <div class="name" style="line-height: 1.5em; padding-left: 10px">
+          <label style="margin-right: 1em">Name:</label> {{x.user}}
+        </div>
+<!-- bdjhsdfj -->
+
+       
+        <div class="reason" style="line-height: 1.5em; padding-left: 10px">
+          <label style="margin-right: 1em">Reason:</label>{{x.reason}}
+        </div>
+        <div
+          class="aproval"
+          style="
+            line-height: 1.5em;
+            width: 200px;
+            height: 35px;
+            padding-top: 5px;
+            padding-left: 10px;
+            color: rgb(172, 201, 25);
+          "
+        >
+          <label style="margin-right: 1em">Status:</label>{{x.status}}
+        </div>
+      </div>
+      {% endif %}
+      
+      {% if x.status == 'accepted' %}
+      <div
+        class="status"
+        style="
+          height: 117px;
+          box-shadow: 5px 10px rgb(14, 199, 48);
+          border: 1px solid rgb(75, 72, 72);
+          margin-top: 1rem;
+        "
+      >
+        <div class="name" style="line-height: 1.5em; padding-left: 10px">
+          <label style="margin-right: 1em">Name:</label> Samten Gyeltshen
+        </div>
+        <div class="reason" style="line-height: 1.5em; padding-left: 10px">
+          <label style="margin-right: 1em">Reason:</label>For fire wood and
+          stone
+        </div>
+        <div
+          class="aproval"
+          style="
+            line-height: 1.5em;
+
+            width: 200px;
+            height: 35px;
+            padding-top: 5px;
+            padding-left: 10px;
+            color: rgb(14, 199, 48);
+          "
+        >
+          <label style="margin-right: 1em">Status:</label>Approved
+        </div>
+      </div>
+      {% endif %}
+
+      {% if x.status == 'rejected' %}
+      <div
+        class="status"
+        style="
+          height: 117px;
+          box-shadow: 5px 10px rgb(255, 0, 60);
+          border: 1px solid rgb(75, 72, 72);
+          margin-top: 1rem;
+        "
+      >
+        <div class="name" style="line-height: 1.5em; padding-left: 10px">
+          <label style="margin-right: 1em">Name:</label> Samten Gyeltshen
+        </div>
+        <div class="reason" style="line-height: 1.5em; padding-left: 10px">
+          <label style="margin-right: 1em">Reason:</label>For fire wood and
+          stone
+        </div>
+        <div
+          class="aproval"
+          style="
+            line-height: 1.5em;
+            width: 200px;
+            height: 35px;
+            padding-top: 5px;
+            padding-left: 10px;
+            color: rgb(255, 0, 60);
+          "
+        >
+          <label style="margin-right: 1em">Status:</label>Rejected
+        </div>
+      </div>
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+    </div>
+    <script src={% static 'css/assets/js/jquery.min.js' %}></script>
+    <script src={% static 'css/assets/bootstrap/js/bootstrap.min.js' %}></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src={% static 'css/assets/js/theme.js' %}></script>
+  </body>
+</html>

@@ -58,6 +58,7 @@ class Order(models.Model):
 ###################################   my app  ##########################
 class UserData(models.Model):
     CID = models.IntegerField(primary_key=True)
+	# CID = models.OneToOneField(User, on_delete=models.CASCADE)
     user  = models.OneToOneField(User, on_delete=models.CASCADE)
     Name = models.CharField(max_length=100)
     gen = [
@@ -81,11 +82,13 @@ class UserData(models.Model):
         return str(self.CID)
 
 
+
 class Marriage(models.Model):
 	MarriageId = models.IntegerField()
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	Spousecid = models.IntegerField()
-	# Spousecid = models.OneToOneField(UserData, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
+	# Spousecid = models.IntegerField()
+	your_cid = models.OneToOneField(UserData, on_delete=models.CASCADE, related_name="you")
+	Spousecid = models.OneToOneField(UserData, on_delete=models.CASCADE, related_name="spouce")
 	# Spousename = models.CharField(max_length=100)
 	MarriageCertificate  = models.ImageField(upload_to='image', null=True)
 	status = models.BooleanField(default=False)
@@ -94,13 +97,18 @@ class Marriage(models.Model):
 	def __str__(self):
 		return str(self.user)
 
-class childdata(models.Model):
-	ChildName = models.CharField(max_length=100)
-	DOB = models.DateField()
-	ParentsMarriageID = models.OneToOneField(Marriage, on_delete=models.CASCADE)
 
-	# def __str__(self):
-	# 	return self.ChildName
+class Passdata(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	reason = models.CharField(max_length=100)
+	request_date = models.DateTimeField(auto_now_add=True)
+	status = models.CharField(max_length=100, default="pending")
+
+	def __str__(self):
+		return str(self.user)
+
+
+
 
 
 

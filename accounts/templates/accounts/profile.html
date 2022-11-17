@@ -17,7 +17,6 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
   </head>
-
   <body>
     <div class="container">
       <div class="main-body">
@@ -38,7 +37,7 @@
                   {% for x in profile %}
                   {% if x.user == request.user %}
                   <img
-                    src="{{x.profile.url}}"
+                    src="{{ x.profile.url }}"
                     alt="Admin"
                     class="rounded-circle"
                     height="190px"
@@ -169,11 +168,12 @@
               </ol>
             </nav> -->
             <!-- /Breadcrumb -->
+             
+            {% for i in marriage %}
+            {% if i.user == request.user %}
             <h6 style="color: rgb(255, 94, 0); margin-top: 10px;">SPOUSE DETAILS</h6>
-            {% for x in profile %}
-            {% for y in marriage %}
-            {% if x.CID == y.Spousecid and y.user ==  request.user  %}
-          
+           
+           
             <div class="row gutters-sm">
               <div class="col-md-4 mb-3">
                 <div class="card" style="margin-top: 25px;">
@@ -181,13 +181,15 @@
                   
                    
                     <div class="d-flex flex-column align-items-center text-center">
+                      
                       <img
-                        src="{{x.profile.url}}"
+                        src= "{{ i.Spousecid.profile.url }}"
                         alt="Admin"
                         class="rounded-circle"
                         height="190px"
                         width="190"
                       />
+                      
                     </div>
                   </div>
                 </div>
@@ -197,10 +199,10 @@
                       class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
                     >
                  
-                    
+                      
                       <h6 class="mb-0">
                         <i class="fa fa-user" style="margin-right: 1em;"></i>Username</h6>
-                        <span class="text-secondary">{{x.user}}</span>
+                        <span class="text-secondary">{{i.Spousecid.user}}</span>
                       </li>
       
       
@@ -208,7 +210,7 @@
                       >
                         <h6 class="mb-0">
                           <i class="fa fa-envelope" style="margin-right: 1em;"></i>Email</h6>
-                        <span class="text-secondary">{{x.email}}</span>
+                        <span class="text-secondary">{{i.Spousecid.email}}</span>
                       </li>
       
       
@@ -222,6 +224,7 @@
                     </ul>
                   </div>
                 </div>
+                
               <div class="col-md-8">
                 <div class="card mb-3" style="margin-top: 25px;">
                   <div class="card-body">
@@ -229,35 +232,35 @@
                       <div class="col-sm-3">
                         <h6 class="mb-0">Full Name</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">{{x.Name}}</div>
+                      <div class="col-sm-9 text-secondary">{{i.Spousecid.Name}}</div>
                     </div>
                     <hr />
                     <div class="row">
                         <div class="col-sm-3">
                           <h6 class="mb-0">CID Number</h6>
                         </div>
-                        <div class="col-sm-9 text-secondary">{{x.CID}}</div>
+                        <div class="col-sm-9 text-secondary">{{i.Spousecid.CID}}</div>
                       </div>
                       <hr/>
                     <div class="row">
                       <div class="col-sm-3">
                         <h6 class="mb-0">DoB</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">{{x.DOB}}</div>
+                      <div class="col-sm-9 text-secondary">{{i.Spousecid.DOB}}</div>
                     </div>
                     <hr />
                     <div class="row">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Village</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">{{x.Village}}</div>
+                      <div class="col-sm-9 text-secondary">{{i.Spousecid.Village}}</div>
                     </div>
                     <hr />
                     <div class="row">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Chiwog</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">{{x.Chiwog}}</div>
+                      <div class="col-sm-9 text-secondary">{{i.Spousecid.Chiwog}}</div>
                     </div>
                     <hr />
                     <div class="row">
@@ -265,7 +268,7 @@
                         <h6 class="mb-0">Thram Number</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        {{x.ThramNo}}
+                        {{i.Spousecid.ThramNo}}
                       </div>
                     </div>
                     <hr />
@@ -274,7 +277,7 @@
                           <h6 class="mb-0">Household Number</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          {{x.HouseHoldNo}}
+                          {{i.Spousecid.HouseHoldNo}}
                         </div>
                       </div>
                       <hr/>
@@ -283,7 +286,7 @@
                           <h6 class="mb-0">Phone Number</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                         {{x.contact_number}}
+                          {{i.Spousecid.contact_number}}
                         </div>
                       </div>
                       <hr/>
@@ -309,9 +312,163 @@
         </div>
       </div>
     </div>
-   
-    {% endif %}
+    
+    {% else %}
+    {% for x in profile %}
+         {% if i.user == x.user  %}
+         {% if request.user == i.Spousecid.user %}
+         <h6 style="color: rgb(255, 94, 0); margin-top: 10px;">SPOUSE DETAILS</h6>
+           
+         
+        
+         <!-- <h3>{{i.user}}</h3> -->
+       
+         <div class="row gutters-sm">
+          <div class="col-md-4 mb-3">
+            <div class="card" style="margin-top: 25px;">
+              <div class="card-body">
+              
+               
+                <div class="d-flex flex-column align-items-center text-center">
+                  <img
+                    src="{{ x.profile.url }}"
+                    alt="Admin"
+                    class="rounded-circle"
+                    height="190px"
+                    width="190"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="card mt-3">
+              <ul class="list-group list-group-flush">
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                >
+             
+                
+                  <h6 class="mb-0">
+                    <i class="fa fa-user" style="margin-right: 1em;"></i>Username</h6>
+                    <span class="text-secondary">{{x.user}}</span>
+                  </li>
+  
+  
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                  >
+                    <h6 class="mb-0">
+                      <i class="fa fa-envelope" style="margin-right: 1em;"></i>{{x.email}}</h6>
+                    <span class="text-secondary">y.</span>
+                  </li>
+  
+  
+                  <li
+                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                  >
+                    <h6 class="mb-0">
+                      <i class="fa fa-cog" style="margin-right: 1em;"></i>Password</h6>
+                    <span class="text-secondary">Dechen</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          <div class="col-md-8">
+            <div class="card mb-3" style="margin-top: 25px;">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Full Name</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">{{x.Name}}</div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">CID Number</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">{{x.CID}}</div>
+                  </div>
+                  <hr/>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">DoB</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">{{x.DOB}}</div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Village</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">{{x.Village}}</div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Chiwog</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">{{x.Chiwog}}</div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Thram Number</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{x.ThramNo}}
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Household Number</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{x.HouseHoldNo}}
+                    </div>
+                  </div>
+                  <hr/>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Phone Number</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{x.contact_number}}
+                    </div>
+                  </div>
+                  <hr/>
+                <div class="row">
+                  <div class="col-sm-12">
+                   
+                    <a
+                      class="btn btn-info"
+                      target="__blank"
+                      href=" " style="width:110px; margin-top:10px;"
+                      >Edit</a
+                    >
+                  
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+         
+        {% endif %}
+        {% endif %}
+      
+        
     {% endfor %}
+    {% endif %}    
+    
     {% endfor %}
+     
+    
+
   </body>
 </html>

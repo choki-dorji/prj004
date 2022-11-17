@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect 
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
-from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth import authenticate, login, logout
-
+from django.urls import reverse_lazy
 from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.conf import settings
+from datetime import date, datetime
 
 from django.contrib.auth.decorators import login_required
 
@@ -33,6 +34,15 @@ def registerPage(request):
 	context = {'form':form}
 	return render(request, 'accounts/register.html', context)
 
+class PasswordChangeView(PasswordChangeView):
+	form_class = PasswordChangeForm
+	success_url = reverse_lazy('password_success')
+
+def PasswordSuccess(request):
+	return render(request, 'accounts/password_success.html', {})
+
+
+
 def loginPage(request):
 	if request.user.is_authenticated:
 		return redirect('index')
@@ -45,9 +55,11 @@ def loginPage(request):
 
 			if user is not None:
 				login(request, user)
+				messages.success(request, 'Successfully logged in')
 				return redirect('index')
+				
 			else:
-				messages.info(request, 'Username OR password is incorrect')
+				messages.error(request, 'Username OR password is incorrect')
 
 		context = {}
 		return render(request, 'accounts/login.html', context)
@@ -58,27 +70,82 @@ def logoutUser(request):
 
 
 
-
+@login_required(login_url='login')
 def profile(request):
 	profile = UserData.objects.filter(status=True)
 	marriage = Marriage.objects.filter(status = True)
-	for i in profile:
-		for y in marriage:
-			if i.CID == y.Spousecid:
-				print(i.CID)
-				print(y.Spousecid)
+	for i in marriage:
+	
+			if (i.user == request.user):
+				print(i.your_cid )
+				print(i.Spousecid)
+			else:
+				for x in profile:
+					if (x.user == request.user):
+						print("jjdfh")
+						cids = str(i.Spousecid)
+						cids2 = str(request.user)
+						print(cids, cids2)
+						if cids == cids2:
+							print("sdhdfbjdh")
+
+		
+	
+	review_query = UserData.objects.filter(user=request.user)
+	if review_query.exists():
+		messages.error(request, 'You have already added data')
+				
 	return render(request, 'accounts/profile.html', 
 	 {'profile': profile, 'marriage': marriage}
 	)
 
+
+
 def navigation(request):
-	return render(request, 'accounts/navbar2.html'
+	profile = UserData.objects.filter(status=True)
+	# for i in profile:
+	# 	print(i.profile.url)
+	return render(request, 'accounts/navbar1.html', {'profile': profile}
 	)
 
 
 @login_required(login_url='login')
 def index(request):
 	return render(request, 'accounts/index.html')
+
+@login_required(login_url='login')
+def passview(request):
+	passview = Passdata.objects.all()
+	return render(request, 'accounts/passview.html', {'passview': passview})
+
+@login_required(login_url='login')
+def passdata(request):
+	if request.method == 'POST':
+		review_user = request.user
+		reason = request.POST.get('option')
+		em = Passdata( 
+		user = review_user,
+		reason = reason
+		)
+		email1 = EmailMessage(
+            "Gewog Management System",
+            "Hello " + str(em.user) + " you have successfully request your pass with our system. Please wait for few hours, we have to process your request. THANK YOU",
+            settings.EMAIL_HOST_USER,
+            [review_user.email],)
+		email1.fail_silently = False
+		email1.send()
+		em.save()
+
+		messages.success(request, 'You have successfully request for the pass')
+	
+	
+
+		return redirect('index')
+
+
+	return render(request, 'accounts/pass.html')
+
+
 
 
 def main(request):
@@ -89,39 +156,6 @@ def main(request):
 # 	return render(request, 'accounts/marriage.html')
 
 ################################################################################################
-def childdata(request):
-	if request.method == 'POST':
-		review_user = request.user
-		Cname = request.POST.get('ChildName')
-		dob = request.POST.get('DOB')
-		Mid = request.POST.get('ParentsMarriageID')
-
-		em = childdata(
-			ChildName= Cname, 
-			user = review_user, 
-			DoB= dob,
-			ParentsMarriageID  = Mid
-		)
-		email1 = EmailMessage(
-            "Gewog Management System",
-            "Hello " + str(em.user) + " you have successfully added Your Marriage Data in our system. Please wait for few hours, we have to process your details. THANK YOU",
-            settings.EMAIL_HOST_USER,
-            [review_user.email],)
-		email1.fail_silently = False
-		email1.send()
-
-		em.save()
-
-		return redirect('index')
-
-	return render(request, 'accounts/childdata.html')
-	
-
-		
-
-
-
-
 
 
 
@@ -130,33 +164,53 @@ def childdata(request):
 ####################################################################################
 @login_required(login_url='login')
 def marriage(request):
-	marriage = UserData.objects.filter(status=True)
+	marriages = Marriage.objects.filter(status=True)
+	userdata = UserData.objects.filter(status=True)
+
+	for x in userdata:
+		for i in marriages:
+			if i.user == request.user:
+				print("user "+ str(request.user))
+				print("dfhdfbbjsdhfvdhs")
+
+				
+
+				if i.Spousecid in userdata:
+					print("spouse " + str(i.Spousecid))
+
+					# print("me " + str(userdata.CID))
+				# elif i.user in userdata:
+				# 	print('elif', i.user)
+				# 	# print('elif', x.CID)
+			if i.user == x.user :
+				print("jjjjjjjjjsjhdjhs")
+
+
+	review_query = UserData.objects.filter(user=request.user)
+	if review_query.exists():
+		messages.error(request, 'You have already added data')
+
+	
 	
 	if request.method == 'POST':
 		review_user = request.user
-		# review_query = User.objects.filter(user=review_user)
-		# if review_query.exists():
-        #     raise ValidationError("You have already reviewed")
 		mid = request.POST.get('MarriageId')
 		scid = request.POST.get('Spousecid')
-		# sname = request.POST.get('Spousename')
+		ucid = request.user.username
 		marriagecert = request.FILES['MarriageCertificate']
-		# POST.get('MarriageCertificate')
 		
-		print(scid)
-		x = UserData.objects.all()
-		for i in x:
-			print(i.CID)
-			print(scid)
-			if (str(i.CID) == scid):
+		
+		
+		for i in userdata:
+			if (str(i.CID) == scid and scid != ucid):
 				em = Marriage(
 				MarriageId= mid, 
 				user = review_user, 
-				Spousecid = scid,
-				# Spousename = sname,
+				Spousecid = UserData.objects.get(CID = scid),
+				your_cid = request.user.username,
 				MarriageCertificate = marriagecert
-			)
-		
+				)
+
 				email1 = EmailMessage(
 				"Gewog Management System",
 				"Hello "+ str(em.user) + "you have successfully added Your child Data in our system. Please wait for few hours, we have to process your details. THANK YOU",
@@ -166,32 +220,34 @@ def marriage(request):
 				email1.send()
 
 				em.save()
-
+				messages.info(request, 'You have successfully added your marriage data')
 				return redirect('index')
-		
-
-		
-			else: 
-				print("uhiusdh")
+			elif str(scid == ucid):
+				print(ucid)
+				print(scid)
+				messages.info(request, 'You cannot have same CID as your spouse')
+				break
 
 		# print(UserData.objects.all())
 		
-		
 
-
-
-
-	return render(request, 'accounts/marriage.html', {'marriage':marriage})
+	return render(request, 'accounts/marriage.html', {'userdata': userdata,'marriages': marriages})
 
 
 
 
 ###########################################################################################################
             
-
+#completed
 @login_required(login_url='login')
 def personal(request):
-	if request.method == 'POST':
+	# today.strftime("%Y")
+	
+	review_query = UserData.objects.filter(user=request.user)
+	if review_query.exists():
+		messages.error(request, 'You have already added data')
+
+	elif request.method == 'POST':
 		review_user = request.user
 		
 		# review_query = User.objects.filter(user=review_user)
@@ -199,7 +255,7 @@ def personal(request):
         #     raise ValidationError("You have already reviewed")
 		Name = request.POST.get('Name')
 		DOB = request.POST.get('DOB')
-		Cid = request.POST.get('Cid')
+		Cid = request.user.username
 		Chiwog = request.POST.get('Chiwog')
 		Village = request.POST.get('Village')
 		HouseHoldNo = request.POST.get('HouseholdNumber')
@@ -209,34 +265,62 @@ def personal(request):
 		marriage = request.POST.get('marriage')
 		gender = request.POST.get('gender')
 
+		# print(date.today().strftime("%Y"))
+		now = int(date.today().strftime("%Y"))
+		# date_object = datetime.strptime(date_str, '%m-%d-%Y').date()
+		# dob = datetime.strftime(DOB, '%Y-%m-%d').date()
+		dob = DOB[0:4]
+		print(DOB)
+		print(type(DOB))
+
+		print(dob)
+		dob = int(dob)
+		print(type(dob))
+		print(now)
+		if (now - dob >= 18):
+			em = UserData( Name=Name, DOB=DOB,
+			user = review_user,
+				CID=Cid,Chiwog=Chiwog,
+				Village=Village, 
+				HouseHoldNo= HouseHoldNo, 
+				gender=gender,
+				ThramNo= ThramNo, 
+				profile= upload, 
+				contact_number= phone, 
+			email = review_user.email)
+	
+
+		
 
 
-		em = UserData( Name=Name, DOB=DOB,
-		user = review_user,
-		CID=Cid,Chiwog=Chiwog,
-		Village=Village, 
-		HouseHoldNo= HouseHoldNo, 
-		gender=gender,
-		ThramNo= ThramNo, 
-		profile= upload, 
-		contact_number= phone, 
-		email = review_user.email)
-		# print(em.email)
-		# # print(gender)
-		# print(em.user)
-		email1 = EmailMessage(
-            "Gewog Management System",
-            "Hello " + em.Name + " you have successfully added Your Data in our system. Please wait for few hours, we have to process your details. THANK YOU",
-            settings.EMAIL_HOST_USER,
-            [em.email],)
-		email1.fail_silently = False
-		email1.send()
-		em.save()
+			email1 = EmailMessage(
+					"Gewog Management System",
+					"Hello " + em.Name + " you have successfully added Your Data in our system. Please wait for few hours, we have to process your details. THANK YOU",
+					settings.EMAIL_HOST_USER,
+					[em.email],)
+			email1.fail_silently = False
+			email1.send()
+			em.save()
 
-		if(marriage == 'yes'):
-			return redirect('marriage')
+			if(marriage == 'yes'):
+				messages.success(request, 'You have successfully added data')
+				return redirect('marriage')
+			else:
+				messages.success(request, 'You have successfully added data')
+				return redirect('index')
+
 		else:
-			return redirect('index')
+			messages.error(request, 'Your are not eligible to register, you have to be atleast 18 years old')
+			
+			
+
+
+		
+		
+
+		
+
+		
 
 
 	return render(request, 'accounts/personalinfo.html')

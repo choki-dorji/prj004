@@ -161,6 +161,7 @@
  
  </head>
  <body>
+	
 	 
 	 <div class="limiter">
 		 <div class="container-login100">
@@ -170,11 +171,13 @@
 					 <span class="login100-form-title p-b-26">
 						 Welcome
 					 </span>
+					 {% include 'accounts/message.html' %}
 					 <div class="wrap-input100 validate-input" style="margin-top: 10%;">
+						
 						 <form  method="post" action="">
 							 {%  csrf_token  %}
 						 <input class="input100" type="text" name="username">
-						 <span class="focus-input100" data-placeholder="username"></span>
+						 <span class="focus-input100" data-placeholder="CID"></span>
 					 </div>
  
 					 <div class="wrap-input100 validate-input" data-validate="Enter password">
@@ -184,6 +187,9 @@
 						 <input class="input100" type="password" name="password">
 						 <span class="focus-input100" data-placeholder="Password"></span>
 					 </div>
+					 <a class = "txt2" href="{% url 'reset_password' %}">
+						Forgot Password?
+					</a>
  
 					 <div class="container-login100-form-btn">
 						 <div class="wrap-login100-form-btn">
@@ -191,21 +197,12 @@
 							 <button class="login100-form-btn" type="submit">
 								 Login
 							 </button>
+							 
 						 </div>
 					 </form>
 					 </div>
 
-					 {% for message in messages %}
-					 <p id="messages">{{message}}</p>
-					 <script>
-						swal({
-					  title: "Good job!",
-					  text: "{{message}}",
-					  icon: "success",
-					  button: "Okay",
-					});
-					 </script>
-					 {% endfor %}	
+					
 					
 					 <div class="text-center p-t-115">
 						 <span class="txt1">
