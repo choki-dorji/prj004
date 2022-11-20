@@ -111,6 +111,7 @@ class childdata(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	childname= models.CharField(max_length=100)
 	DOB = models.DateField()
+	Gender = models.CharField(max_length=100)
 	request_date = models.DateTimeField(auto_now_add=True)
 	parentsid = models.IntegerField()
 

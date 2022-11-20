@@ -23,11 +23,6 @@
         class="text-dark mb-4"
         style="color: rgb(41, 14, 12); width: 600px; font-size: 18px"
       >
-        &nbsp;&nbsp;
-        <img
-          src={% static 'css/assets/img/circle-user-solid%20(1).svg' %}
-          style="padding-right: 10px"
-        />
         &nbsp;<strong>CHILD CENSUS REGISTRATION</strong>
       </h4>
       <div class="card shadow-lg o-hidden border-0 my-5">
@@ -39,11 +34,11 @@
               <div
                 class="flex-grow-1 bg-register-image"
                 style="
-                  background-image: url('assets_1/img/child.jpg');
+                  background-image: url( '{% static "/css/assets_1/img/child.jpg"  %}'  );
                   background-size: contain;
                   background-position: center;
                   background-repeat: no-repeat;
-                  margin-left: 1.9rem;
+                  margin-left: 1.9rem;   
                   height: 20rem;
                   margin-top: 5rem;
                 "
@@ -57,10 +52,20 @@
                   <div class="form-group row">
                     <label>Child Name</label>
                     <input class="form-control" type="text" name="childname" required/>
+                  </div>
+                  <div style="margin-top: 9px; margin-left: 1px">
+                    <label>Gender</label> <br />
+                    <input type="radio" id="html" name="marriage" value="Male" />
+                    <label for="html">Male</label>
+                    <input type="radio" id="css" name="marriage" value="Female" style="margin-left: 3rem" />
+                    <label for="css">Female</label>
+                  </div><br>
 
+                  <div class="form-group row">
                     <label>DOB</label>
                     <input class="form-control" type="date" name="DOB" required/>
 
+                    
                     <label>Parents Marriage ID</label>
                     <input class="form-control" type="number" name="parent" required/>
                   </div>
