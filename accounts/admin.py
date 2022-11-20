@@ -43,7 +43,7 @@ class MarriageUserDataAdmin(admin.ModelAdmin):
                 "Gewog Management System",
                 "Hello " + str(obj.user) + " we have verified your data and you have successfully added your marriage data to our system",
                 settings.EMAIL_HOST_USER,
-                [obj.email]
+                [obj.user.email]
                 )
             email1.fail_silently = False
             email1.send()
@@ -79,3 +79,5 @@ class PassDataAdmin(admin.ModelAdmin):
         #         )
         #     email1.fail_silently = False
         #     email1.send()
+
+admin.site.register(childdata)

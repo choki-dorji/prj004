@@ -57,7 +57,7 @@ class Order(models.Model):
 
 ###################################   my app  ##########################
 class UserData(models.Model):
-    CID = models.IntegerField(primary_key=True)
+    CID = models.IntegerField(unique=True, null=False)
 	# CID = models.OneToOneField(User, on_delete=models.CASCADE)
     user  = models.OneToOneField(User, on_delete=models.CASCADE)
     Name = models.CharField(max_length=100)
@@ -87,15 +87,15 @@ class Marriage(models.Model):
 	MarriageId = models.IntegerField()
 	user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
 	# Spousecid = models.IntegerField()
-	your_cid = models.OneToOneField(UserData, on_delete=models.CASCADE, related_name="you")
+	your_cid = models.IntegerField()
 	Spousecid = models.OneToOneField(UserData, on_delete=models.CASCADE, related_name="spouce")
 	# Spousename = models.CharField(max_length=100)
-	MarriageCertificate  = models.ImageField(upload_to='image', null=True)
+	MarriageCertificate  = models.FileField(upload_to='file', null=True)
 	status = models.BooleanField(default=False)
 	created = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
-		return str(self.user)
+		return str(self.MarriageId)
 
 
 class Passdata(models.Model):
@@ -106,6 +106,17 @@ class Passdata(models.Model):
 
 	def __str__(self):
 		return str(self.user)
+
+class childdata(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	childname= models.CharField(max_length=100)
+	DOB = models.DateField()
+	request_date = models.DateTimeField(auto_now_add=True)
+	parentsid = models.IntegerField()
+
+	def __str__(self):
+		return str(self.user)
+
 
 
 

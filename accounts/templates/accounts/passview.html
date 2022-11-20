@@ -1,24 +1,8 @@
-<!DOCTYPE html>
-{% load static %}
-<html>
-  <head>
-    <meta charset="utf-8" />
+{%  extends 'accounts/main2.html' %}
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-    />
-    <title>Pass</title>
-    <link rel="stylesheet" href={% static 'css/assets/bootstrap/css/bootstrap.min.css' %}/>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-    />
-    <link rel="stylesheet" href={% static 'css/assets/fonts/fontawesome-all.min.css'
-    %}/> <link rel="stylesheet" href={% static 'css/assets/css/untitled.css' %} />
-  </head>
+{% block content %}
 
-  <body class="bg-gradient-primary">
+{% load static  %}
     <div class="container">
         &nbsp;&nbsp;
         <img
@@ -26,7 +10,8 @@
           style="padding-right: 10px; color: #b6514f"
         />
         &nbsp;<strong>PASS RESULT</strong>
-      </h4>
+      </h4><br>
+      <hr>
       {% for x in passview %}
       {% if x.user == request.user %}
       {% if x.status == 'pending' %}
@@ -63,9 +48,9 @@
           <label style="margin-right: 1em">Status:</label>{{x.status}}
         </div>
       </div>
-      {% endif %}
       
-      {% if x.status == 'accepted' %}
+      
+      {% elif x.status == 'accepted' %}
       <div
         class="status"
         style="
@@ -97,9 +82,9 @@
           <label style="margin-right: 1em">Status:</label>Approved
         </div>
       </div>
-      {% endif %}
+      
 
-      {% if x.status == 'rejected' %}
+      {% elif x.status == 'rejected' %}
       <div
         class="status"
         style="
@@ -130,13 +115,10 @@
           <label style="margin-right: 1em">Status:</label>Rejected
         </div>
       </div>
+      
       {% endif %}
       {% endif %}
       {% endfor %}
     </div>
-    <script src={% static 'css/assets/js/jquery.min.js' %}></script>
-    <script src={% static 'css/assets/bootstrap/js/bootstrap.min.js' %}></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    <script src={% static 'css/assets/js/theme.js' %}></script>
-  </body>
-</html>
+    
+{% endblock %}

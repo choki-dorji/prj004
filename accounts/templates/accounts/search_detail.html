@@ -1,0 +1,99 @@
+
+
+ <!DOCTYPE html>
+ {% load static %}
+ <html lang="en">
+ <head>
+	 <title>Login</title>
+	 <meta charset="UTF-8">
+	 <!-- <link href={% static 'css/img/favicon.ico' %} rel="icon"> -->
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	 <link href={% static 'css/img/favicon.ico' %} rel="icon">
+	 <!-- <link rel="icon" type="image/png" href="{% static 'css/imag/favicon.ico' %}"/> -->
+ 
+	 <link rel="stylesheet" rel="stylesheet" href="{% static 'css/User/vendor/bootstrap/css/bootstrap.min.css' %} "/>
+ 
+	 <link rel="stylesheet" rel="stylesheet" href="{% static 'css/User/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+ 
+	 <link rel="stylesheet" rel="stylesheet" href="{% static 'css/User/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+ 
+	 <link rel="stylesheet" rel="stylesheet" href="{% static 'css/User/vendor/animate/animate.css' %}">
+
+	 <link rel="stylesheet" rel="stylesheet" href="{% static 'css/User/vendor/css-hamburgers/hamburgers.min.css' %}">
+ 
+	 <link rel="stylesheet" rel="stylesheet" href="{% static 'css/User/vendor/animsition/css/animsition.min.css' %}">
+ 
+	 <link rel="stylesheet" rel="stylesheet" href="{% static 'css/User/vendor/select2/select2.min.css' %}">
+ 
+	 <link rel="stylesheet" rel="stylesheet" href="{% static 'css/User/vendor/daterangepicker/daterangepicker.css' %}">
+ 
+	 <link rel="stylesheet" rel="stylesheet" href="{% static 'css/User/css/util.css' %}">
+	 <link rel="stylesheet" rel="stylesheet" href="{% static 'css/User/css/main.css' %}">
+
+     <link rel="stylesheet" href={% static 'assets_3/bootstrap/css/bootstrap.min.css' %} />
+     <link
+       rel="stylesheet"
+       href="https://fonts.googleapis.com/css?family=Actor"
+     />
+     <link rel="stylesheet" href={% static 'assets_3/css/Profile-Card.css' %} />
+     <link rel="stylesheet" href={% static 'assets_3/css/styles.css' %} />
+     <link
+       rel="stylesheet"
+       href={% static 'assets_3/css/User-Payment-Overview-Rows---Panel-Container.css' %}
+     />
+ 
+ </head>
+ <body>
+	
+	 
+	 <div class="limiter">
+		 <div class="container-login100">
+			 <div class="wrap-login100">
+				{% for i in userdata %}
+              
+                <div class="profile-card">
+                    <div class="profile-back"></div>
+                    <img class="rounded-circle profile-pic" src="{{i.profile.url}}" />
+                    <h3 class="profile-name" style="background-color: rgb(31, 155, 155)">
+                      {{i.Name}}
+                    </h3>
+                    <p class="profile-bio">Village : {{i.Village}}</p>
+                    <p class="profile-bio">Chiwog : {{i.Chiwog}}</p>
+                    <p class="profile-bio">Email: {{i.email}}</p>
+                    <p class="profile-bio">Phone Number: {{i.contact_number}}</p>
+                  </div>
+            
+                  {% endfor %}
+
+					
+					
+					 
+			 </div>
+		 </div>
+	 </div>
+	 
+ 
+	 <div id="dropDownSelect1"></div>
+	 
+ <!--===============================================================================================-->
+	 <script src="{% static 'css/User/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+ <!--===============================================================================================-->
+	 <script src="{% static 'css/User/vendor/animsition/js/animsition.min.js' %}"></script>
+ <!--===============================================================================================-->
+	 <script src="{% static 'css/User/vendor/bootstrap/js/popper.js' %}"></script>
+	 <script src="{% static 'css/User/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+ <!--===============================================================================================-->
+	 <script src="{% static 'css/User/vendor/select2/select2.min.js' %}"></script>
+ <!--===============================================================================================-->
+	 <script src="{% static 'css/User/vendor/daterangepicker/moment.min.js' %}"></script>
+	 <script src="{% static 'css/User/vendor/daterangepicker/daterangepicker.js' %}"></script>
+ <!--===============================================================================================-->
+	 <script src="{% static 'css/User/vendor/countdowntime/countdowntime.js' %}"></script>
+ <!--===============================================================================================-->
+	 <script src="{% static 'css/User/js/main.js' %}"></script>
+	
+
+	
+ 
+ </body>
+ </html> 

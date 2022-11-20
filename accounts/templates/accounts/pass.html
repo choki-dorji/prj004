@@ -22,7 +22,6 @@
   </head>
 
   <body class="bg-gradient-primary">
-    {% include 'accounts/navbar2.html' %}
     <div class="container">
       <h4 style="margin-top: 30px;">
         
@@ -36,7 +35,13 @@
             <div class="col-lg-5 d-none d-lg-flex">
               <div
                 class="flex-grow-1 bg-register-image"
-               id="passimage"
+                style=
+                " background-image: url( '{% static "/css/assets/img/pass.jpg" %}'  );
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 20rem;
+                margin-top: 90px;"
               ></div>
             </div>
             <div class="col-lg-7">
@@ -47,12 +52,12 @@
 
                    
 
-                    <label>Reasons <br>
-                    <select style="margin-top: 10px; height: 2rem; width: 23rem;" name="option" class="form-control">
-                        <option value="House contruction" name="option">For Construction of house</option>
-                        <option value="Fire Wood" name="option">For Fire wood</option>
-                        <option value="Timber" name="option">For Timber</option>
-                        <option value="sand and stone" name="option">For sand and stone</option>
+                    <label style= "width: 100%">Reason for the pass<br>
+                    <select style = "margin-top: 45px; height: 2rem; width: 100%;" name="option" class="form-control" >
+                        <option value="House contruction" class="form-control" name="option">For Construction of house</option>
+                        <option value="Fire Wood" class="form-control" name="option">For Fire wood</option>
+                        <option value="Timber" class="form-control" name="option">For Timber</option>
+                        <option value="sand and stone" class="form-control" name="option">For sand and stone</option>
                       </select>
                       </label>
 
@@ -78,3 +83,4 @@
 
   </body>
 </html>
+

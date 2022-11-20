@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.shortcuts import get_object_or_404
 from datetime import date, datetime
 
 from django.contrib.auth.decorators import login_required
@@ -70,33 +71,93 @@ def logoutUser(request):
 
 
 
+# @login_required(login_url='login')
+# def profile(request):
+# 	profile = UserData.objects.filter(status=True)
+# 	marriage = Marriage.objects.filter(status = True)
+# 	child = childdata.objects.all()
+# 	# for i in marriage:
+# 	# 		if (i.user == request.user):
+# 	# 			print(i.your_cid )
+# 	# 			print(i.Spousecid)
+# 	# 		else:
+# 	# 			for x in profile:
+# 	# 				if (x.user == request.user):
+# 	# 					print("jjdfh")
+# 	# 					cids = str(i.Spousecid)
+# 	# 					cids2 = str(request.user)
+# 	# 					print(cids, cids2)
+# 	# 					if cids == cids2:
+# 	# 						print("sdhdfbjdh")
+# 	# if request.method == "POST":
+# 	# 	x = request.POST.get('name')
+# 	# 	print(x)
+# 	# product = get_object_or_404(UserData, id=product_id)
+
+# 	return render(request, 'accounts/profile.html', 
+# 	 {'profile': profile, 'marriage': marriage, 'child': child}
+# 	)
+
 @login_required(login_url='login')
-def profile(request):
+def profile(request, user_id):
 	profile = UserData.objects.filter(status=True)
 	marriage = Marriage.objects.filter(status = True)
-	for i in marriage:
+	child = childdata.objects.all()
+
+	print(user_id)
 	
-			if (i.user == request.user):
-				print(i.your_cid )
-				print(i.Spousecid)
-			else:
-				for x in profile:
-					if (x.user == request.user):
-						print("jjdfh")
-						cids = str(i.Spousecid)
-						cids2 = str(request.user)
-						print(cids, cids2)
-						if cids == cids2:
-							print("sdhdfbjdh")
+
+	if request.method == 'POST':
+		x= request.POST['name']
+		y= request.POST['village']
+		z= request.POST['chiwog']
+		u= request.POST['thramno']
+		v= request.POST['houseno']
+		c= request.POST['phone']
+
+		print(x)
 
 		
 	
-	review_query = UserData.objects.filter(user=request.user)
-	if review_query.exists():
-		messages.error(request, 'You have already added data')
-				
+		UserData.objects.filter(user = request.user).update(
+			Name = x,
+			Village = y,
+			Chiwog =z,
+			ThramNo = u,
+			HouseHoldNo = v,
+			contact_number = c
+		)
+	
 	return render(request, 'accounts/profile.html', 
-	 {'profile': profile, 'marriage': marriage}
+	 {'profile': profile, 'marriage': marriage, 'child': child}
+	)
+	
+	
+
+def update(request, user_id):
+	# user = UserData.objects.get(pk=user_id)
+	if request.method == 'POST':
+		x= request.POST['name']
+		y= request.POST['village']
+		z= request.POST['chiwog']
+		u= request.POST['thramno']
+		v= request.POST['houseno']
+		c= request.POST['phone']
+	
+		name = UserData.objects.filter(user = request.user)
+		# .update(
+		# 	Name = x,
+		# 	Village = y,
+		# 	Chiwog =z,
+		# 	ThramNo = u,
+		# 	HouseHoldNo = v,
+		# 	contact_number = c
+		# )
+		print(name)
+
+	
+	return render(request, 'accounts/update.html', 
+	 
 	)
 
 
@@ -117,6 +178,40 @@ def index(request):
 def passview(request):
 	passview = Passdata.objects.all()
 	return render(request, 'accounts/passview.html', {'passview': passview})
+
+@login_required(login_url='login')
+def Childdata(request):
+	marriage = Marriage.objects.filter(status = True)
+	if request.method == 'POST':
+		childname = request.POST.get('childname')
+		DOB = request.POST.get('DOB')
+		parent = request.POST.get('parent')
+		for i in marriage:
+			print(i.MarriageId)
+			if str(i.MarriageId) == str(parent):
+
+				data = childdata(
+						user = request.user,
+						childname = childname,
+						DOB = DOB,
+						parentsid = i.MarriageId
+				)
+
+				email1 = EmailMessage(
+						"Gewog Management System",
+						"Hello " + str(data.user) + " you have successfully posted the data of your child into our system. Please wait for few hours, we have to process your request. THANK YOU",
+						settings.EMAIL_HOST_USER,
+						[request.user.email],)
+				email1.fail_silently = False
+				email1.send()
+				messages.success(request, 'You have successfully added child data')
+				data.save()
+				return redirect('index')
+
+			else:
+				messages.error(request, 'Your Marriage id was not in the database')
+				break
+	return render(request, 'accounts/childdata.html')
 
 @login_required(login_url='login')
 def passdata(request):
@@ -186,9 +281,13 @@ def marriage(request):
 				print("jjjjjjjjjsjhdjhs")
 
 
-	review_query = UserData.objects.filter(user=request.user)
+	review_query = Marriage.objects.filter(user=request.user)
 	if review_query.exists():
 		messages.error(request, 'You have already added data')
+
+	review_query = UserData.objects.filter(status=True)
+	if review_query.exists() == False:
+		messages.error(request, 'Your Data is not approved yet.')	
 
 	
 	
@@ -198,6 +297,8 @@ def marriage(request):
 		scid = request.POST.get('Spousecid')
 		ucid = request.user.username
 		marriagecert = request.FILES['MarriageCertificate']
+
+		print(scid)
 		
 		
 		
@@ -222,6 +323,8 @@ def marriage(request):
 				em.save()
 				messages.info(request, 'You have successfully added your marriage data')
 				return redirect('index')
+
+
 			elif str(scid == ucid):
 				print(ucid)
 				print(scid)
@@ -232,12 +335,33 @@ def marriage(request):
 		
 
 	return render(request, 'accounts/marriage.html', {'userdata': userdata,'marriages': marriages})
-
-
-
+############################################################################
+def userProfile(request, pk):
+	profile = UserData.objects.get(CID = pk)
+	return render(request, 'accounts/userprofile.html', {'profile': profile})
 
 ###########################################################################################################
-            
+def search(request, pk):
+	if request.method == 'POST':
+		search = request.POST.get('search')
+		venue = UserData.objects.filter(Name__contains = search)
+		return render(request, 'accounts/search.html', {'search': search, 'venue': venue})
+
+	
+
+	return render(request, 'accounts/search.html', {})
+
+def searchdetail(request, pk):
+	userdata = UserData.objects.filter(status=True, id=pk)
+	return render(request, 'accounts/search_detail.html', {'userdata': userdata})
+
+
+def footer(request):
+	return render(request, 'accounts/footer1.html')
+
+	
+
+
 #completed
 @login_required(login_url='login')
 def personal(request):
@@ -302,7 +426,7 @@ def personal(request):
 			email1.send()
 			em.save()
 
-			if(marriage == 'yes'):
+			if(marriage == 'Yes'):
 				messages.success(request, 'You have successfully added data')
 				return redirect('marriage')
 			else:
@@ -312,16 +436,6 @@ def personal(request):
 		else:
 			messages.error(request, 'Your are not eligible to register, you have to be atleast 18 years old')
 			
-			
-
-
-		
-		
-
-		
-
-		
-
 
 	return render(request, 'accounts/personalinfo.html')
 

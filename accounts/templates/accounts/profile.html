@@ -1,474 +1,789 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-    />
-    <title>User Information</title>
-    <link rel="stylesheet" href={% static 'css/assets_2/bootstrap/css/bootstrap.min.css' %} />
-    <link
-      rel="stylesheet"
-      href={% static 'css/assets_2/css/Registration-Form-with-Photo.css' %}
-    />
-    <link rel="stylesheet" href={% static 'css/assets_2/css/styles.css' %} />
+	<head>
+		<meta charset="utf-8">
+		<title>Gewog management system</title>
+		<meta content="width=device-width, initial-scale=1.0" name="viewport">
+		<meta content="" name="keywords">
+		<meta content="" name="description">
+	
+		  <!-- search bar link -->
+		  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+		  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
+		<!-- Favicon -->
+		<link href="img/favicon.ico" rel="icon">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-  </head>
-  <body>
-    <div class="container">
-      <div class="main-body">
-        <!-- Breadcrumb -->
-        <!-- <nav aria-label="breadcrumb" class="main-breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="">Home</a></li>
-          </ol>
-        </nav> -->
-        <!-- /Breadcrumb -->
-        <h6 style="color: rgb(255, 94, 0); margin-top: 10px;">PERSONAL DETAILS</h6>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		
+		<!-- Google Web Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">   
+	
+		<!-- Icon Font Stylesheet -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+	
+		<!-- Libraries Stylesheet -->
+		<link href={% static 'navbar2/lib/animate/animate.min.css' %} rel="stylesheet">
+		<link href={% static 'navbar2/lib/owlcarousel/assets/owl.carousel.min.css' %} rel="stylesheet">
+		<link href={% static 'navbar2/lib/lightbox/css/lightbox.min.css' %} rel="stylesheet">
+	
+		<!-- Customized Bootstrap Stylesheet -->
+		<link href={% static 'navbar2/css/bootstrap.min.css' %} rel="stylesheet">
+	
+		<link rel="stylesheet" href={% static 'navbar2/assets/fonts/fontawesome-all.min.css' %} />
+	
+		<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href={% static 'navbar2/mycss/style.css' %} />
+	
+		<!-- Template Stylesheet -->
+		<link href={% static 'navbar2/css/style.css' %} rel="stylesheet">
 
-        <div class="row gutters-sm">
-          <div class="col-md-4 mb-3">
-            <div class="card" style="margin-top: 25px;">
-              <div class="card-body">
-                <div class="d-flex flex-column align-items-center text-center">
-                  {% for x in profile %}
-                  {% if x.user == request.user %}
-                  <img
-                    src="{{ x.profile.url }}"
-                    alt="Admin"
-                    class="rounded-circle"
-                    height="190px"
-                    width="190"
-                  />
-                </div>
+
+		<!-- hsdbjash -->
+		
+
+		
+
+		<style>
+			.search__container {
+			padding-top: 50px;
+			margin-top: -2rem;
+			}
+
+				.search__title {
+				font-size: 10px;
+				font-weight: 900;
+				text-align: center;
+				color: #ff8b88;
+				}
+
+				.search__input {
+				width: 100%;
+				padding: 12px 24px;
+				background-color: transparent;
+				transition: transform 250ms ease-in-out;
+				font-size: 12px;
+				line-height: 18px;
+				font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+					Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+				color: #575756;
+				background-color: transparent;
+				/*background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg); */
+
+				background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+				background-repeat: no-repeat;
+				background-size: 18px 18px;
+				background-position: 95% center;
+				border-radius: 50px;
+				border: 1px solid #575756;
+				transition: all 250ms ease-in-out;
+				backface-visibility: hidden;
+				transform-style: preserve-3d;
+				}
+
+				.search__input::placeholder {
+				color: color(#575756 a(0.8));
+				text-transform: uppercase;
+				letter-spacing: 1.5px;
+				}
+/* 
+				.search__input:hover {
+				padding: 12px 0;
+				outline: 0;
+				border: 1px solid transparent;
+				border-bottom: 1px solid #575756;
+				background-position: 100% center;
+				} */
+
+				.credits__container {
+				margin-top: 24px;
+				}
+
+				.credits__text {
+				text-align: center;
+				font-size: 13px;
+				line-height: 18px;
+				}
+
+				.credits__link {
+				color: #ff8b88;
+				text-decoration: none;
+				transition: color 250ms ease-in;
+				}
+
+				.credits__link:hover {
+				color: color(#ff8b88 blackness(+25%));
+				}
+
+				.credits__link:focus {
+				color: color(#ff8b88 blackness(+25%));
+}
+		</style>
+
+		
+
+	
+	</head>
+<body>
+	{%  include 'accounts/navbar1.html'  %}
+	
+	<div class="container">
+    <div class="main-body">
+      <!-- Breadcrumb -->
+      <!-- <nav aria-label="breadcrumb" class="main-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="">Home</a></li>
+        </ol>
+      </nav> -->
+      <!-- /Breadcrumb -->
+      <h6 style="font-family: Roboto; font-weight: 600;">PERSONAL DETAILS</h6>
+
+      <div class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+          <div class="card" style="margin-top: 25px;">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                {% for x in profile %}
+                {% if x.user == request.user %}
+                <img
+                  src="{{ x.profile.url }}"
+                  alt="Admin"
+                  class="rounded-circle"
+                  height="190px"
+                  width="190"
+                />
               </div>
-            </div>
-            <div class="card mt-3">
-              <ul class="list-group list-group-flush">
-                <li
-                  class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                >
-                  <h6 class="mb-0">
-                    <i class="fa fa-user" style="margin-right: 1em;"></i>Username</h6>
-                   
-                          <span class="text-secondary">{{request.user}}</span>
-                        </li>
-                 
-        
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                        >
-                          <h6 class="mb-0">
-                            <i class="fa fa-envelope" style="margin-right: 1em;"></i>Email</h6>
-                          <span class="text-secondary">{{x.email}}</span>
-                        </li>
-        
-        
-                        <li
-                          class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                        >
-                          <h6 class="mb-0">
-                            <i class="fa fa-cog" style="margin-right: 1em;"></i>Password</h6>
-                          <span class="text-secondary">Dechen</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-          <div class="col-md-8">
-            <div class="card mb-3" style="margin-top: 25px;">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Full Name</h6>
-                  </div>
-                 
-                  <div class="col-sm-9 text-secondary">{{x.Name}}</div>
-                  
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">CID Number</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">{{x.CID}}</div>
-                  </div>
-                  <hr/>
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">DoB</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">{{x.DOB}}</div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Village</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">{{x.Village}}</div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Chiwog</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">{{x.Chiwog}}</div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Thram Number</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{x.ThramNo}}
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Household Number</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{x.HouseHoldNo}}
-                    </div>
-                  </div>
-                  <hr/>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone Number</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{x.contact_number}}
-                    </div>
-                  </div>
-                  <hr/>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <a
-                      class="btn btn-info"
-                      target="__blank"
-                      href=" " style="width:110px; margin-top:10px;"
-                      >Edit</a
-                    >
-                    {% endif %}
-                    {% endfor %}
-                  </div>
-                </div>
-              </div>
-            </div>
             </div>
           </div>
-        </div>
-
-            <!-- Breadcrumb -->
-            <!-- <nav aria-label="breadcrumb" class="main-breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="">Home</a></li>
-              </ol>
-            </nav> -->
-            <!-- /Breadcrumb -->
-             
-            {% for i in marriage %}
-            {% if i.user == request.user %}
-            <h6 style="color: rgb(255, 94, 0); margin-top: 10px;">SPOUSE DETAILS</h6>
-           
-           
-            <div class="row gutters-sm">
-              <div class="col-md-4 mb-3">
-                <div class="card" style="margin-top: 25px;">
-                  <div class="card-body">
-                  
-                   
-                    <div class="d-flex flex-column align-items-center text-center">
-                      
-                      <img
-                        src= "{{ i.Spousecid.profile.url }}"
-                        alt="Admin"
-                        class="rounded-circle"
-                        height="190px"
-                        width="190"
-                      />
-                      
-                    </div>
-                  </div>
-                </div>
-                <div class="card mt-3">
-                  <ul class="list-group list-group-flush">
-                    <li
-                      class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                    >
+          <div class="card mt-3">
+            <ul class="list-group list-group-flush">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+              >
+                <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">
+                  <i class="fa fa-user" style="margin-right: 1em;"></i>Username</h6>
                  
-                      
-                      <h6 class="mb-0">
-                        <i class="fa fa-user" style="margin-right: 1em;"></i>Username</h6>
-                        <span class="text-secondary">{{i.Spousecid.user}}</span>
+                        <span style="font-family: Roboto; color: #A19D9D;">{{request.user}}</span>
                       </li>
-      
+               
       
                       <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
                       >
-                        <h6 class="mb-0">
+                        <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">
                           <i class="fa fa-envelope" style="margin-right: 1em;"></i>Email</h6>
-                        <span class="text-secondary">{{i.Spousecid.email}}</span>
+                        <span style="font-family: Roboto; color: #A19D9D;">{{x.email}}</span>
                       </li>
       
       
                       <li
                         class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
                       >
-                        <h6 class="mb-0">
+                        <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">
                           <i class="fa fa-cog" style="margin-right: 1em;"></i>Password</h6>
-                        <span class="text-secondary">Dechen</span>
+                        <span style="font-family: Roboto; color: #A19D9D;">Dechen</span>
                       </li>
                     </ul>
                   </div>
                 </div>
+        <div class="col-md-8">
+          <div class="card mb-3" style="margin-top: 25px;">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Full Name</h6>
+                </div>
+               
+                <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{x.Name}}</div>
                 
-              <div class="col-md-8">
-                <div class="card mb-3" style="margin-top: 25px;">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Full Name</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary">{{i.Spousecid.Name}}</div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-sm-3">
-                          <h6 class="mb-0">CID Number</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">{{i.Spousecid.CID}}</div>
-                      </div>
-                      <hr/>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">DoB</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary">{{i.Spousecid.DOB}}</div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Village</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary">{{i.Spousecid.Village}}</div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Chiwog</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary">{{i.Spousecid.Chiwog}}</div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Thram Number</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary">
-                        {{i.Spousecid.ThramNo}}
-                      </div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-sm-3">
-                          <h6 class="mb-0">Household Number</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                          {{i.Spousecid.HouseHoldNo}}
-                        </div>
-                      </div>
-                      <hr/>
-                      <div class="row">
-                        <div class="col-sm-3">
-                          <h6 class="mb-0">Phone Number</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                          {{i.Spousecid.contact_number}}
-                        </div>
-                      </div>
-                      <hr/>
-                    <div class="row">
-                      <div class="col-sm-12">
-                       
-                        <a
-                          class="btn btn-info"
-                          target="__blank"
-                          href=" " style="width:110px; margin-top:10px;"
-                          >Edit</a
-                        >
-                      
-                      
-                      </div>
-                    </div>
+              </div>
+              <hr />
+              <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">CID Number</h6>
+                  </div>
+                  <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{x.CID}}</div>
+                </div>
+                <hr/>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">DoB</h6>
+                </div>
+                <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{x.DOB}}</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Gender</h6>
+                </div>
+                <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{x.gender}}</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Village</h6>
+                </div>
+                <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{x.Village}}</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Chiwog</h6>
+                </div>
+                <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{x.Chiwog}}</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Thram Number</h6>
+                </div>
+                <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">
+                  {{x.ThramNo}}
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Household Number</h6>
+                  </div>
+                  <div class="col-sm-9 " style="font-family: Roboto; color: #A19D9D;">
+                    {{x.HouseHoldNo}}
                   </div>
                 </div>
+                <hr/>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Phone Number</h6>
+                  </div>
+                  <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">
+                    {{x.contact_number}}
+                  </div>
+                </div>
+                <hr/>
+              <div class="row">
+                <div class="col-sm-12">
+                  <a
+                    class="btn btn-info"
+                    target="__blank"
+                    href="#editEmployeeModal" style="width:110px; background-color: #077777; margin-top:10px;" data-toggle="modal"
+                    >Edit</a
+                  >
+                  
+                  {% endif %}
+                  {% endfor %}
                 </div>
               </div>
             </div>
           </div>
+          </div>
         </div>
       </div>
-    </div>
-    
-    {% else %}
-    {% for x in profile %}
-         {% if i.user == x.user  %}
-         {% if request.user == i.Spousecid.user %}
-         <h6 style="color: rgb(255, 94, 0); margin-top: 10px;">SPOUSE DETAILS</h6>
+
+          <!-- Breadcrumb -->
+          <!-- <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="">Home</a></li>
+            </ol>
+          </nav> -->
+          <!-- /Breadcrumb -->
            
+          {% for i in marriage %}
+          {% if i.user == request.user %}
+          <h6 style="font-family: Roboto; font-weight: 600;">SPOUSE DETAILS</h6>
          
-        
-         <!-- <h3>{{i.user}}</h3> -->
-       
-         <div class="row gutters-sm">
-          <div class="col-md-4 mb-3">
-            <div class="card" style="margin-top: 25px;">
-              <div class="card-body">
-              
-               
-                <div class="d-flex flex-column align-items-center text-center">
-                  <img
-                    src="{{ x.profile.url }}"
-                    alt="Admin"
-                    class="rounded-circle"
-                    height="190px"
-                    width="190"
-                  />
+         
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card" style="margin-top: 25px;">
+                <div class="card-body">
+                
+                 
+                  <div class="d-flex flex-column align-items-center text-center">
+                    
+                    <img
+                      src= "{{ i.Spousecid.profile.url }}"
+                      alt="Admin"
+                      class="rounded-circle"
+                      height="190px"
+                      width="190"
+                    />
+                    
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="card mt-3">
-              <ul class="list-group list-group-flush">
-                <li
-                  class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                >
-             
-                
-                  <h6 class="mb-0">
-                    <i class="fa fa-user" style="margin-right: 1em;"></i>Username</h6>
-                    <span class="text-secondary">{{x.user}}</span>
-                  </li>
-  
-  
-                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                  >
-                    <h6 class="mb-0">
-                      <i class="fa fa-envelope" style="margin-right: 1em;"></i>{{x.email}}</h6>
-                    <span class="text-secondary">y.</span>
-                  </li>
-  
-  
+              <div class="card mt-3">
+                <ul class="list-group list-group-flush">
                   <li
                     class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
                   >
-                    <h6 class="mb-0">
-                      <i class="fa fa-cog" style="margin-right: 1em;"></i>Password</h6>
-                    <span class="text-secondary">Dechen</span>
-                  </li>
-                </ul>
+               
+                    
+                    <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">
+                      <i class="fa fa-user" style="margin-right: 1em;"></i>Username {{i.Spousecid.id}}</h6>
+                      <span style="font-family: Roboto; color: #A19D9D;">{{i.Spousecid.user}}</span>
+                    </li>
+    
+    
+                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                    >
+                      <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">
+                        <i class="fa fa-envelope" style="margin-right: 1em;"></i>Email</h6>
+                      <span style="font-family: Roboto; color: #A19D9D;">{{i.Spousecid.email}}</span>
+                    </li>
+    
+    
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                    >
+                      <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">
+                        <i class="fa fa-cog" style="margin-right: 1em;"></i>Password</h6>
+                      <span style="font-family: Roboto; color: #A19D9D;">Dechen</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
-          <div class="col-md-8">
-            <div class="card mb-3" style="margin-top: 25px;">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Full Name</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">{{x.Name}}</div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">CID Number</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">{{x.CID}}</div>
-                  </div>
-                  <hr/>
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">DoB</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">{{x.DOB}}</div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Village</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">{{x.Village}}</div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Chiwog</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">{{x.Chiwog}}</div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Thram Number</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{x.ThramNo}}
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Household Number</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{x.HouseHoldNo}}
-                    </div>
-                  </div>
-                  <hr/>
+              
+            <div class="col-md-8">
+              <div class="card mb-3" style="margin-top: 25px;">
+                <div class="card-body">
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Phone Number</h6>
+                      <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Full Name</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                     {{x.contact_number}}
+                    <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{i.Spousecid.Name}}</div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">CID Number</h6>
+                      </div>
+                      <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{i.Spousecid.CID}}</div>
+                    </div>
+                    <hr/>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">DoB</h6>
+                    </div>
+                    <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{i.Spousecid.DOB}}</div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0"style="font-family: Roboto; font-weight: 600;">Gender</h6>
+                    </div>
+                    <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{i.Spousecid.gender}}</div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Village</h6>
+                    </div>
+                    <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{i.Spousecid.Village}}</div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Chiwog</h6>
+                    </div>
+                    <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{i.Spousecid.Chiwog}}</div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Thram Number</h6>
+                    </div>
+                    <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">
+                      {{i.Spousecid.ThramNo}}
                     </div>
                   </div>
-                  <hr/>
-                <div class="row">
-                  <div class="col-sm-12">
-                   
-                    <a
-                      class="btn btn-info"
-                      target="__blank"
-                      href=" " style="width:110px; margin-top:10px;"
-                      >Edit</a
-                    >
-                  
-                  
-                  </div>
+                  <hr />
+                  <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Household Number</h6>
+                      </div>
+                      <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">
+                        {{i.Spousecid.HouseHoldNo}}
+                      </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Phone Number</h6>
+                      </div>
+                      <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">
+                        {{i.Spousecid.contact_number}}
+                      </div>
+                    </div>
+                    <!-- <hr/> -->
+                  <!-- <div class="row">
+                    <div class="col-sm-12">
+                     
+                      <a
+                        class="btn btn-info"
+                        target="__blank"
+                        href="#editEmployeeModal1" style="width:110px; margin-top:10px;" data-toggle="modal"
+                        >Edit</a
+                      >
+                    
+                    
+                    </div>
+                  </div> -->
                 </div>
               </div>
-            </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+  
+  {% else %}
+  {% for x in profile %}
+       {% if i.user == x.user  %}
+       {% if request.user == i.Spousecid.user %}
+       <h6 style="font-family: Roboto; font-weight: 600;">SPOUSE DETAILS</h6>
          
-        {% endif %}
-        {% endif %}
+       
       
-        
-    {% endfor %}
-    {% endif %}    
-    
-    {% endfor %}
+       <!-- <h3>{{i.user}}</h3> -->
      
+       <div class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+          <div class="card" style="margin-top: 25px;">
+            <div class="card-body">
+            
+             
+              <div class="d-flex flex-column align-items-center text-center">
+                <img
+                  src="{{ x.profile.url }}"
+                  alt="Admin"
+                  class="rounded-circle"
+                  height="190px"
+                  width="190"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="card mt-3">
+            <ul class="list-group list-group-flush">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+              >
+           
+              
+                <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">
+                  <i class="fa fa-user" style="margin-right: 1em;"></i>Username</h6>
+                  <span style="font-family: Roboto; color: #A19D9D;">{{x.user}}</span>
+                </li>
+
+
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                >
+                  <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">
+                    <i class="fa fa-envelope" style="margin-right: 1em;"></i>Email</h6>
+                  <span style="font-family: Roboto; color: #A19D9D;">{{x.email}}</span>
+                </li>
+
+
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                >
+                  <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">
+                    <i class="fa fa-cog" style="margin-right: 1em;"></i>Password</h6>
+                  <span style="font-family: Roboto; color: #A19D9D;">Dechen</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        <div class="col-md-8">
+          <div class="card mb-3" style="margin-top: 25px;">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Full Name</h6>
+                </div>
+                <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{x.Name}}</div>
+              </div>
+              <hr />
+              <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">CID Number</h6>
+                  </div>
+                  <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{x.CID}}</div>
+                </div>
+                <hr/>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">DoB</h6>
+                </div>
+                <div class="col-sm-9 " style="font-family: Roboto; color: #A19D9D;">{{x.DOB}}</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Gender</h6>
+                </div>
+                <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{x.gender}}</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Village</h6>
+                </div>
+                <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{x.Village}}</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Chiwog</h6>
+                </div>
+                <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">{{x.Chiwog}}</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Thram Number</h6>
+                </div>
+                <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">
+                  {{x.ThramNo}}
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Household Number</h6>
+                  </div>
+                  <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">
+                    {{x.HouseHoldNo}}
+                  </div>
+                </div>
+                <hr/>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0" style="font-family: Roboto; font-weight: 600;">Phone Number</h6>
+                  </div>
+                  <div class="col-sm-9" style="font-family: Roboto; color: #A19D9D;">
+                   {{x.contact_number}}
+                  </div>
+                </div>
+                <!-- <hr/> -->
+              <!-- <div class="row">
+                <div class="col-sm-12">
+                 
+                  <a
+                    class="btn btn-info"
+                    target="__blank"
+                    href="#editEmployeeModal1" style="width:110px; margin-top:10px;" data-toggle="modal"
+                    >Edit</a
+                  >
+                
+                
+                </div>
+              </div> -->
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+       
+      {% endif %}
+      {% endif %}
+    
+      
+  {% endfor %}
+
+  {% endif %} 
+  <!-- partial:index.partial.html -->
+  {% if child %}
+  <div class="container">
+    <h2>Child Data</h2>
+    <ul class="responsive-table">
+      <li class="table-header">
+        <div class="col col-2">Child Name</div>
+        <div class="col col-2">DOB</div>
+        <div class="col col-2">Gender</div>
+        <div class="col col-2">Birth Certificate</div>
+      </li>
+      {% for i in child %}
+      <li class="table-row">
+        <div class="col col-2" data-label="Child Name">{{i.childname}}</div>
+        <div class="col col-2" data-label="DOB" >{{i.DOB}}</div>
+        <div class="col col-2" data-label="Gender" >Male</div>
+        <div class="col col-2" data-label="Birth Certificate" >files.pdf</div>
+      </li>
+
+      {% endfor %}
+
+      <!-- <li class="table-row">
+        <div class="col col-2" data-label="Child Name">Pema Tshomo</div>
+        <div class="col col-2" data-label="DOB">30/10/2021</div>
+        <div class="col col-2" data-label="Gender">Female</div>
+        <div class="col col-2" data-label="Birth Certificate">files.pdf</div>
+      </li> -->
+    </ul>
+  </div>
+  {% endif %}
+{% endfor %}
+  <!-- modal html -->
+  
+
+
+
+
+
+    <!-- Edit Modal HTML -->
+    <div id="editEmployeeModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form method="post" action="">
+            {% csrf_token %}
+            <div class="modal-header">
+              <h4 class="modal-title" style="font-family: Roboto; font-weight: 700;">Edit Profile Detail</h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-hidden="true"
+              >
+                &times;
+              </button>
+            </div>
+            {% for i in profile %}
+            {% for x in marriage %}
+            {% if i.user == request.user %}
+            <div class="modal-body">
+              <div class="form-group">
+                <label style="font-family: Roboto; color: hsl(0, 100%, 1%);">Full Name</label>
+                <input type="text" class="form-control" required  style="font-family: Roboto; color: #A19D9D;" name="name" value="{{i.Name}}" />
+              </div>
+
+              <div class="form-group">
+                <label style="font-family: Roboto; color: hsl(0, 100%, 1%);">Village</label>
+                <input type="text" class="form-control" required style="font-family: Roboto; color: #A19D9D;" name="village" value="{{i.Village}}"/>
+              </div>
+
+              <div class="form-group">
+                <label style="font-family: Roboto; color: hsl(0, 100%, 1%);">Chiwog</label>
+                <input type="text" class="form-control" required style="font-family: Roboto; color: #A19D9D;" name="chiwog" value="{{i.Chiwog}}"/>
+              </div>
+
+              <div class="form-group">
+                <label style="font-family: Roboto; color: hsl(0, 100%, 1%);">Thram Number</label>
+                <input type="number" class="form-control"  style="font-family: Roboto; color: #A19D9D;" required name="thramno" value="{{i.ThramNo}}" />
+              </div>
+
+              <div class="form-group">
+                <label style="font-family: Roboto; color: hsl(0, 100%, 1%);">House Number</label>
+                <input type="text" class="form-control" style="font-family: Roboto; color: #A19D9D;" required name="houseno" value="{{i.HouseHoldNo}}" />
+              </div>
+
+              <div class="form-group">
+                <label>Phone</label>
+                <input type="number" class="form-control" style="font-family: Roboto; color: #A19D9D;" required  name="phone"  value="{{i.contact_number}}"/>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <input
+                type="button"
+                class="btn btn-default"
+                data-dismiss="modal"
+                value="Cancel"
+              />
+              <input style="font-family: Roboto; border-radius: 5px; background-color: #077777;" type="submit" class="btn btn-info" value="Save" name="Submit" />
+            </div>
+        
+            {% endif %}
+            
+            {% endfor %}
+            {% endfor %}
+          </form>
+        </div>
+      </div>
+    </div>
+
+
     
 
-  </body>
+	{%  include 'accounts/footer1.html'  %}
+	
+	
+</body>
+
+   <!-- JavaScript Libraries -->
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+   <script src={% static 'navbar2/lib/wow/wow.min.js' %}></script>
+   <script src={% static 'navbar2/lib/easing/easing.min.js' %}></script>
+   <script src={% static 'navbar2/lib/waypoints/waypoints.min.js' %}></script>
+   <script src={% static 'navbar2/lib/owlcarousel/owl.carousel.min.js' %}></script>
+   <script src={% static 'navbar2/lib/counterup/counterup.min.js' %}></script>
+   <script src={% static 'navbar2/lib/parallax/parallax.min.js' %}></script>
+   <script src={% static 'navbar2/lib/lightbox/js/lightbox.min.js' %}></script>
+
+  
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   <script type="module" src="https://unpkg.com/ionicons@5.5/dist/ionicons.esm.js"></script>
+   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+   
+
+   <!-- Template Javascript -->
+   <script src={% static 'navbar2/js/main.js' %}></script>
+
+   <!-- dropdown -->
+   <script>
+		document.getElementById("drop").addEventListener("click", function(e) {
+	   document.getElementById("myDropdown").classList.toggle("show");
+	 });
+	 
+	 
+	 // Close the dropdown if the user clicks outside of it
+	 window.addEventListener("click", function(event) {
+	   if (!event.target.matches('.dropbtn')) {
+		 document.querySelectorAll(".dropdown-content.show")
+		   .forEach(openDropdown => openDropdown.classList.remove('show'))
+	   }
+	 });
+   </script>
+  
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src={% static 'css/assets/js/theme.js' %}></script>
+	
+    <script src={% static 'css/assets/js/jquery.min.js' %}></script>
+    <script src={% static 'css/assets/bootstrap/js/bootstrap.min.js' %}></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src={% static 'css/assets/js/theme.js' %}></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+	
+
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
